@@ -5,3 +5,5 @@
 cat /mysql/mysql.commands | mysql
 
 tail -f /var/log/mysql.log /var/log/mysql.err
+
+# Where is this file called from? 
