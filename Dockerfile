@@ -1,17 +1,19 @@
 # This file creates a container that runs MySQL Server
 #
 # Author: Paul Czarkowski
-# Date: 08/04/2013
+# Date: 01/05/2013
 
 
-FROM ubuntu:12.04
+FROM centos
 MAINTAINER Paul Czarkowski "paul@paulcz.net"
 
-RUN apt-get update
-RUN apt-get -y install mysql-server
+RUN yum -y install mysql-server
+
+RUN mysql_install_db
 
 ADD mysql-listen.cnf /etc/mysql/conf.d/mysql-listen.cnf
 
+EXPOSE 3306
+
 # Start mysql server
 CMD ["/usr/bin/mysqld_safe"]
-
