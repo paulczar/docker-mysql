@@ -1,16 +1,16 @@
 #!/bin/sh
 
-USERNAME=${USERNAME:-mysql}
-PASSWORD=${PASSWORD:-mysql}
+USERNAME=${USERNAME:-'mysql'}
+PASSWORD=${PASSWORD:-'mysql'}
 DATABASE=${DATABASE:-'*'}
-REMOTE=${REMOTE:-'*'}
+REMOTE=${REMOTE:-'%'}
 
 service mysqld start
 
 sleep 2
 
-mysql -e "GRANT ALL PRIVILEGES ON $DATABASE.* TO $USERNAME@$REMOTE IDENTIFIED BY '$PASSWORD'"
+mysql -e "GRANT ALL PRIVILEGES ON $DATABASE.* TO '$USERNAME'@'$REMOTE' IDENTIFIED BY '$PASSWORD'"
 
-sleep 2
+service mysqld stop
 
-tail /var/log/mysqld.log
+mysqld_safe
