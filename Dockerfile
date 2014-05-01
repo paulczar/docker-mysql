@@ -13,7 +13,11 @@ RUN mysql_install_db
 
 ADD mysql-listen.cnf /etc/mysql/conf.d/mysql-listen.cnf
 
+ADD start /usr/bin/start-mysql
+
+RUN chmod +x /usr/bin/start-mysql
+
 EXPOSE 3306
 
 # Start mysql server
-CMD ["/usr/bin/mysqld_safe"]
+CMD ["/usr/bin/start-mysql"]

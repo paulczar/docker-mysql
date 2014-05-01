@@ -1,7 +1,12 @@
 #!/bin/sh
 
+USERNAME=${USERNAME:-mysql}
+PASSWORD=${PASSWORD:-mysql}
+DATABASE=${DATABASE:-'*'}
+REMOTE=${REMOTE:-'*'}
+
 /usr/bin/mysqld_safe &
 
-cat /mysql/mysql.commands | mysql
+mysql -e "GRANT ALL PRIVILEGES ON $DATABASE.* TO $USERNAME@$REMOTE IDENTIFIED BY '$PASSWORD'"
 
 tail -f /var/log/mysql.log /var/log/mysql.err
