@@ -7,6 +7,8 @@ REMOTE=${REMOTE:-'*'}
 
 /usr/bin/mysqld_safe &
 
+sleep 5
+
 mysql -e "GRANT ALL PRIVILEGES ON $DATABASE.* TO $USERNAME@$REMOTE IDENTIFIED BY '$PASSWORD'"
 
 tail -f /var/log/mysql.log /var/log/mysql.err
